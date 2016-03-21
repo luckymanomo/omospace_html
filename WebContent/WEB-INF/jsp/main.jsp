@@ -10,6 +10,7 @@
 	java.awt.Color color=null;
 	String hexColor=null;
 	java.io.File filePath=null;
+	String rootPath=request.getContextPath();
 %>
 <%
 	class HalfRoundingFormat extends java.text.DecimalFormat{
@@ -37,10 +38,28 @@
 		}
 	}
 %>
+
+<%!
+	public static String generateFileList(String torrentCPath,String rootPath) {
+		java.io.File filePath=new java.io.File(torrentCPath);
+		StringBuilder stringBuilder=new StringBuilder();
+		for(java.io.File sFile:filePath.listFiles()){
+			String sFileName=sFile.getName();
+			java.util.Random r=new java.util.Random();
+			java.awt.Color color = new java.awt.Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
+			String hexColor = String.format("#%06X", (0xFFFFFF & color.getRGB()));
+			String imageName=(sFile.isDirectory()?"folder.png":"file-icon.png");
+			stringBuilder.append("<li class='clearfix' style='border-left-color: "+hexColor+"'>");
+			stringBuilder.append("<label class='inline'>");
+			stringBuilder.append("<img src='"+rootPath+"/resources/img/"+imageName+"'> "+sFileName);
+			stringBuilder.append("</span></label></li>");
+		}
+		return stringBuilder.toString();
+	}
+	
+%>
 <html>
 <head>
-
-
 
 <link href="<c:url value="/resources/ace/css/bootstrap.min.css" />" rel="stylesheet" />
 <link href="<c:url value="/resources/ace/css/bootstrap-responsive.min.css" />" rel="stylesheet" />
@@ -103,18 +122,7 @@
 						</div>
 					</td>
 					<td>
-						<!--<div class="infobox infobox-green infobox-small infobox-dark">
-							<div class="infobox-progress">
-								<div class="easy-pie-chart percentage" data-percent="61"
-									data-size="39">
-									<span class="percent">61</span> %
-								</div>
-							</div>
-							<div class="infobox-data">
-								<div class="infobox-content">Task</div>
-								<div class="infobox-content">Completion</div>
-							</div>
-						</div>-->
+						
 						<div class="infobox infobox-red">
 							<div class="infobox-progress">
 								<div class="easy-pie-chart percentage" data-percent="<%=(int)(usedSpace/totalSpace*100)%>" data-size="46">
@@ -159,44 +167,16 @@
 								</h6>
 
 								<ul id="tasksC" class="item-list">
-									<%
-										filePath=new java.io.File(torrentCPath);
-										for(java.io.File sFile:filePath.listFiles()){
-											String sFileName=sFile.getName();
-											r=new java.util.Random();
-											color = new java.awt.Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
-											hexColor = String.format("#%06X", (0xFFFFFF & color.getRGB()));
-											%>
-												<li class="clearfix" style="border-left-color: <%=hexColor%>">
-													<label class="inline">
-														<span class="lbl"><%=sFileName%></span>
-													</label>
-												</li>
-											<%
-										}
-									%>
+									<%=generateFileList(torrentCPath,rootPath)%>
 								</ul>
 								<h6 class="smaller lighter red">
 									Downloading
 								</h6>
 								<ul id="tasksD" class="item-list">
-									<%
-										filePath=new java.io.File(torrentDPath);
-										for(java.io.File sFile:filePath.listFiles()){
-											String sFileName=sFile.getName();
-											r=new java.util.Random();
-											color = new java.awt.Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
-											hexColor = String.format("#%06X", (0xFFFFFF & color.getRGB()));
-											%>
-												<li class="clearfix" style="border-left-color: <%=hexColor%>">
-													<label class="inline">
-														<span class="lbl"><%=sFileName%></span>
-													</label>
-												</li>
-											<%
-										}
-									%>
+									<%=generateFileList(torrentDPath,rootPath)%>
 								</ul>
+								
+								
 						</div>
 						</div>
 						</div>
@@ -208,88 +188,6 @@
 	</tr>
 	</table>
 
-	<!-- <div class="main-container container-fluid">-->
-	<!--
-	<div class="main-container">
-		<a class="menu-toggler" id="menu-toggler" href="#"> <span
-			class="menu-text"></span></a>
-		<div class="main-content">
-			<div class="page-content">
-				<div class="row-fluid">
-					<div class="span7 infobox-container">
-						<div class="infobox infobox-orange2  ">
-							<div class="infobox-chart">
-								<span class="sparkline" data-values="196,128,202,177,154,94,100,170,224"></span>
-							</div>
-							<div class="infobox-data">
-								<span class="infobox-data-number">6,251</span>
-								<div class="infobox-content">pageviews</div>
-							</div>
-							<div class="badge badge-success"> 7.2% <i class="icon-arrow-up"></i>
-							</div>
-						</div>
-						<div class="infobox infobox-blue infobox-small infobox-dark">
-							<div class="infobox-chart">
-								<span class="sparkline" data-values="3,4,2,3,4,4,2,2"></span>
-							</div>
-							<div class="infobox-data">
-								<div class="infobox-content">Earnings</div>
-								<div class="infobox-content">$32,000</div>
-							</div>
-						</div>
-						<div class="infobox infobox-grey infobox-small infobox-dark">
-							<div class="infobox-icon">
-								<i class="icon-download-alt"></i>
-							</div>
-							<div class="infobox-data">
-
-								<div class="infobox-content">Downloads</div>
-
-								<div class="infobox-content">1,205</div>
-							</div>
-						</div>
-					</div>
-					<div class="span5">
-						<div class="widget-box">
-							<div class="widget-body">
-								<div class="widget-main">
-									<div id="piechart-placeholder"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row-fluid">
-					<div class="span7">
-						<div class="widget-box transparent">
-							<div class="widget-header widget-header-flat">
-								<h4 class="lighter">
-									<i class="icon-signal"></i> Sale Stats
-								</h4>
-								<div class="widget-toolbar">
-
-									<a href="#" data-action="collapse"> <i
-										class="icon-chevron-up"></i>
-									</a>
-								</div>
-							</div>
-							<div class="widget-body">
-								<div class="widget-main padding-4">
-									<div id="sales-charts"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="hr hr32 hr-dotted"></div>
-				<div class="row-fluid">
-					<div class="span6">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	-->
 	<a href="#" id="btn-scroll-up"
 		class="btn-scroll-up btn btn-small btn-inverse"> <i
 		class="icon-double-angle-up icon-only bigger-110"></i>
@@ -311,24 +209,6 @@
 						.write("<script src='<c:url value='/resources/ace/js/jquery-2.0.3.min.js' />'>"
 								+ "<"+"/script>");
 	</script>
-
-
-
-	<!--<![endif]-->
-
-
-
-	<!--[if IE]>
-
-<script type="text/javascript">
-
- window.jQuery || document.write("<script src='<c:url value='/resources/ace/js/jquery-1.10.2.min.js' />'>"+"<"+"/script>");
-
-</script>
-
-<![endif]-->
-
-
 
 	<script type="text/javascript">
 		if ("ontouchend" in document)
