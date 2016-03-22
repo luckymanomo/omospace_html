@@ -26,7 +26,7 @@ public class ReportController{
       model.addAttribute("Parameter", parameters);
       model.addAttribute("JRDataSource", null);
       model.addAttribute("JasperPath", "/WEB-INF/jasperReport/customer.jasper");
-
+      //test kubss
       return "jasperView";
    }
 
