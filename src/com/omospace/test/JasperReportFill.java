@@ -19,7 +19,7 @@ public class JasperReportFill {
 			JasperPrint jasperPrint = null;
 			jasperPrint = JasperFillManager.fillReport(sourceFileName,parameters, new JREmptyDataSource());
 			JasperExportManager.exportReportToPdfFile(jasperPrint, "D:/java_source_code/LEADs/fitdogcat/WebContent/WEB-INF/jasperReport/simple_report.pdf");
-			System.out.println("Export succesfully");//test jae
+			System.out.println("Export succesfully");//test jae kuy
 		} catch (JRException e) {
 			e.printStackTrace();
 		}
