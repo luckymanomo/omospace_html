@@ -9,7 +9,7 @@ public class TestMain {
 		for(File subF:fileList){
 			if(subF.getName().endsWith(".js")){
 				System.out.println("<script src=\"<c:url value=\"/resources/aceJs/"+subF.getName()+"\" />\"></script>");
-			}//test pongsakorn jae
+			}//test pongsakorn jae kaa
 		}
 	}
 }
