@@ -4,7 +4,7 @@
 }
 .topic_content{
 	font-family:AuthenticHiltonFont;
-	font-size:70px;
+	font-size:20px;
 	text-align: center;
 }
 .main_content{
@@ -23,7 +23,7 @@ body{
 	width:960px;
 	margin:45px auto;
 	*/
-
+	font-size:14px;
 	margin:45px auto;
 	background-color:#ffffff;
 	width: 100%;

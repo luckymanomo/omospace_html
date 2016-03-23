@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/utility"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/spring-framework-3.2.9.RELEASE-dist"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/apache-log4j-2.5-bin"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JasperReports 5.6.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/lib_glassfish"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
