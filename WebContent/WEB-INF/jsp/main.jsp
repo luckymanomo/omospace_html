@@ -60,8 +60,8 @@
 			String imageName=(sFile.isDirectory()?"octicon-file-directory.png":"octicon-file-text.png");
 			//String sizeImageName=(sFile.isDirectory()?"width='14px' height='12px'":"width='12px' height='14px'");
 			String sizeImageName=(sFile.isDirectory()?"width='16px' height='16px'":"width='14px' height='14px'");
-			stringBuilder.append("<li class='clearfix' style='border-left-color: "+hexColor+"'>");
-			stringBuilder.append("<label class='inline' alt='tests'>");
+			stringBuilder.append("<li class='clearfix' style='border-left-color: "+hexColor+"' >");
+			stringBuilder.append("<label class='inline'>");
 			stringBuilder.append("<img src='"+rootPath+"/resources/img/"+imageName+"' "+sizeImageName+"> ");
 			stringBuilder.append(shorten(sFileName,50));
 			stringBuilder.append("</span></label></li>");
@@ -88,9 +88,9 @@
 	<div class="topic_content">Welcome to Monitoring Page.</div>
 	<br>
 	<br>
-	<table class="tableLayout" border="0" width='80%'>
+	<table class="tableLayout" border="0" width='70%'>
 	<tr>
-		<td valign="top" width='40%'>
+		<td valign="top" width='50%'>
 			<table class="tableLayout" border="1">
 				<tr>
 					<td colspan="2">
@@ -164,7 +164,7 @@
 		</td>
 		<td width="25px">
 		</td>
-		<td valign="top" width='60%'>
+		<td valign="top" width='50%'>
 			<table class="tableLayout" border="1" width="100%" style="word-break: break-all;">
 				<tr>
 					<td>
