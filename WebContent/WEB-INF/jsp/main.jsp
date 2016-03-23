@@ -48,10 +48,12 @@
 			java.util.Random r=new java.util.Random();
 			java.awt.Color color = new java.awt.Color(r.nextInt(256),r.nextInt(256),r.nextInt(256),r.nextInt(256));
 			String hexColor = String.format("#%06X", (0xFFFFFF & color.getRGB()));
-			String imageName=(sFile.isDirectory()?"folder.png":"file-icon.png");
+			String imageName=(sFile.isDirectory()?"octicon-file-directory.png":"octicon-file-text.png");
+			//String sizeImageName=(sFile.isDirectory()?"width='14px' height='12px'":"width='12px' height='14px'");
+			String sizeImageName=(sFile.isDirectory()?"width='16px' height='16px'":"width='14px' height='14px'");
 			stringBuilder.append("<li class='clearfix' style='border-left-color: "+hexColor+"'>");
 			stringBuilder.append("<label class='inline'>");
-			stringBuilder.append("<img src='"+rootPath+"/resources/img/"+imageName+"'> "+sFileName);
+			stringBuilder.append("<img src='"+rootPath+"/resources/img/"+imageName+"' "+sizeImageName+"> "+sFileName);
 			stringBuilder.append("</span></label></li>");
 		}
 		return stringBuilder.toString();
@@ -397,8 +399,8 @@
 						position : position || "ne",
 
 						labelBoxBorderColor : null,
-
-						margin : [ -30, 15 ]
+						//margin : [ -30, 15 ]
+						margin : [ 30, 15 ]
 
 					}
 
@@ -445,7 +447,7 @@
 						previousPoint = item.seriesIndex;
 
 						var tip = item.series['label'] + " : "
-								+ item.series['percent'] + '%';
+								+ item.series['percent'].toFixed(2) + '%';
 
 						$tooltip.show().children(0).text(tip);
 
