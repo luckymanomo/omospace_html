@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -40,6 +41,14 @@
 %>
 
 <%!
+
+	public static String shorten(String text, int maxLength) {
+	    String ret = text;
+	    if (ret.length() > maxLength) {
+	        ret = ret.substring(0,maxLength-3) + "...";
+	    }
+	    return ret;
+	}
 	public static String generateFileList(String torrentCPath,String rootPath) {
 		java.io.File filePath=new java.io.File(torrentCPath);
 		StringBuilder stringBuilder=new StringBuilder();
@@ -52,8 +61,9 @@
 			//String sizeImageName=(sFile.isDirectory()?"width='14px' height='12px'":"width='12px' height='14px'");
 			String sizeImageName=(sFile.isDirectory()?"width='16px' height='16px'":"width='14px' height='14px'");
 			stringBuilder.append("<li class='clearfix' style='border-left-color: "+hexColor+"'>");
-			stringBuilder.append("<label class='inline'>");
-			stringBuilder.append("<img src='"+rootPath+"/resources/img/"+imageName+"' "+sizeImageName+"> "+sFileName);
+			stringBuilder.append("<label class='inline' alt='tests'>");
+			stringBuilder.append("<img src='"+rootPath+"/resources/img/"+imageName+"' "+sizeImageName+"> ");
+			stringBuilder.append(shorten(sFileName,50));
 			stringBuilder.append("</span></label></li>");
 		}
 		return stringBuilder.toString();
@@ -80,7 +90,7 @@
 	<br>
 	<table class="tableLayout" border="0" width='80%'>
 	<tr>
-		<td valign="top" width='50%'>
+		<td valign="top" width='40%'>
 			<table class="tableLayout" border="1">
 				<tr>
 					<td colspan="2">
@@ -141,6 +151,7 @@
 						</div>
 					</td>
 				</tr>
+				
 				<tr valign="top">
 					<td colspan="2" align="center">
 						<div class="widget-main">
@@ -153,8 +164,8 @@
 		</td>
 		<td width="25px">
 		</td>
-		<td valign="top" width='50%'>
-			<table class="tableLayout" border="1" style="word-break: break-all;">
+		<td valign="top" width='60%'>
+			<table class="tableLayout" border="1" width="100%" style="word-break: break-all;">
 				<tr>
 					<td>
 						<div class="widget-body">
