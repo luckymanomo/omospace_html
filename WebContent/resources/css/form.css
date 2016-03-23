@@ -2,17 +2,22 @@
     font-family: AuthenticHiltonFont;
     src: url(font/Authentic_Hilton.ttf);
 }
+@font-face {
+    font-family: Minecraft;
+    src: url(font/Minecraft.ttf);
+}
 .topic_content{
-	font-family:AuthenticHiltonFont;
-	font-size:20px;
+	/*font-family:AuthenticHiltonFont;*/
+	font-family:Minecraft;
+	font-size:25px;
 	text-align: center;
 }
 .main_content{
-	/*font-family:AuthenticHiltonFont;*/
+	font-family:Minecraft;
 	font-size:20px;
 }
 .tableLayout{
-	/*font-family:AuthenticHiltonFont;*/
+	font-family:Minecraft;
 	font-size:20px;
 	border-spacing: 10px 10px;
 	margin-left:auto;
@@ -32,6 +37,7 @@ body{
 form{
 	/*width:330px;*/
 	/*border-top:1px dotted #D9D9D9;*/
+	font-family:Minecraft;
 	border:1px dotted #D9D9D9;
 	/*margin:10px 180px;*/
 	text-align: center;

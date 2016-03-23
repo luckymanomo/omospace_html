@@ -62,6 +62,7 @@
 %>
 <html>
 <head>
+<link rel="shortcut icon" href="<%=rootPath+"/resources/img/mario.png"%>">
 
 <link href="<c:url value="/resources/ace/css/bootstrap.min.css" />" rel="stylesheet" />
 <link href="<c:url value="/resources/ace/css/bootstrap-responsive.min.css" />" rel="stylesheet" />
@@ -77,9 +78,9 @@
 	<div class="topic_content">Welcome to Monitoring Page.</div>
 	<br>
 	<br>
-	<table class="tableLayout" border="0">
+	<table class="tableLayout" border="0" width='80%'>
 	<tr>
-		<td valign="top">
+		<td valign="top" width='50%'>
 			<table class="tableLayout" border="1">
 				<tr>
 					<td colspan="2">
@@ -152,8 +153,8 @@
 		</td>
 		<td width="25px">
 		</td>
-		<td valign="top">
-			<table class="tableLayout" border="1">
+		<td valign="top" width='50%'>
+			<table class="tableLayout" border="1" style="word-break: break-all;">
 				<tr>
 					<td>
 						<div class="widget-body">
@@ -162,7 +163,7 @@
 						<div id="task-tab" class="tab-pane active">
 								<h4 class="smaller lighter green">
 									<i class="icon-list"></i>
-									Torrent Lists
+									Torrent List
 								</h4>
 								<h6 class="smaller lighter green">
 									Completed
