@@ -5,13 +5,14 @@
 <%
 	//configuration
 	String piePath="/torrentFiles";
-	String torrentCPath="/torrentFiles/Completed";
 	String torrentDPath="/torrentFiles/Downloading";
+	String torrentCPath="";
 	java.util.Random r=null;
 	java.awt.Color color=null;
 	String hexColor=null;
 	java.io.File filePath=null;
 	String rootPath=request.getContextPath();
+	
 %>
 <%
 	class HalfRoundingFormat extends java.text.DecimalFormat{
@@ -21,6 +22,7 @@
 			setRoundingMode(java.math.RoundingMode.HALF_UP);
 		}
 	}
+
 	double leftSpace=0;
 	double totalSpace=0;
 	double usedSpace=0;
@@ -36,6 +38,8 @@
 			totalSpace=Double.parseDouble(value.toString());
 		}else if(key.equalsIgnoreCase("usedSpace") && (value instanceof Double)) {
 			usedSpace=Double.parseDouble(value.toString());
+		}else if(key.equalsIgnoreCase("torrentCPath") && (value instanceof String)) {
+			torrentCPath=value.toString();
 		}
 	}
 %>
@@ -49,7 +53,7 @@
 	    }
 	    return ret;
 	}
-	public static String generateFileList(String torrentCPath,String rootPath) {
+	public static String generateFileList(String torrentCPath,String rootPath, boolean canDownload) {
 		java.io.File filePath=new java.io.File(torrentCPath);
 		StringBuilder stringBuilder=new StringBuilder();
 		for(java.io.File sFile:filePath.listFiles()){
@@ -60,7 +64,7 @@
 			String imageName=(sFile.isDirectory()?"octicon-file-directory.png":"octicon-file-text.png");
 			//String sizeImageName=(sFile.isDirectory()?"width='14px' height='12px'":"width='12px' height='14px'");
 			String sizeImageName=(sFile.isDirectory()?"width='16px' height='16px'":"width='14px' height='14px'");
-			stringBuilder.append("<li class='clearfix' style='border-left-color: "+hexColor+"' >");
+			stringBuilder.append("<li "+((canDownload && !sFile.isDirectory())?"onClick='sendFileName(\""+sFileName+"\");'":"")+" class='clearfix' style='border-left-color: "+hexColor+"' >");
 			stringBuilder.append("<label class='inline'>");
 			stringBuilder.append("<img src='"+rootPath+"/resources/img/"+imageName+"' "+sizeImageName+"> ");
 			stringBuilder.append(shorten(sFileName,50));
@@ -70,6 +74,12 @@
 	}
 	
 %>
+<script>
+function sendFileName(a){
+	window.open('<%=rootPath%>'+"/download?fileName="+ a);
+}
+</script>
+
 <html>
 <head>
 <link rel="shortcut icon" href="<%=rootPath+"/resources/img/mario.png"%>">
@@ -79,19 +89,23 @@
 <link href="<c:url value="/resources/ace/css/font-awesome.min.css" />" rel="stylesheet">
 
 <script src="<c:url value="/resources/js/form.js" />"></script>
+
+<link href="<c:url value="/resources/css/animate.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/form.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/ace.min.css" />" rel="stylesheet">
 
 <title>Report</title>
 </head>
 <body>
-	<div class="topic_content">Welcome to Monitoring Page.</div>
+<h1 class="animated zoomOutDowN"><div class="topic_content">Welcome to Monitoring Page.</div></h1>
+	
 	<br>
 	<br>
+	<h1 class="animated zoomIn">
 	<table class="tableLayout" border="0" width='70%'>
 	<tr>
 		<td valign="top" width='50%'>
-			<table class="tableLayout" border="1">
+			<table class="tableLayout" border="0">
 				<tr>
 					<td colspan="2">
 						<form action="<c:url value="/report" />" method="POST" target="_blank"">
@@ -165,7 +179,7 @@
 		<td width="25px">
 		</td>
 		<td valign="top" width='50%'>
-			<table class="tableLayout" border="1" width="100%" style="word-break: break-all;">
+			<table class="tableLayout" border="0" width="100%" style="word-break: break-all;">
 				<tr>
 					<td>
 						<div class="widget-body">
@@ -181,13 +195,13 @@
 								</h6>
 
 								<ul id="tasksC" class="item-list">
-									<%=generateFileList(torrentCPath,rootPath)%>
+									<%=generateFileList(torrentCPath,rootPath,true)%>
 								</ul>
 								<h6 class="smaller lighter red">
 									Downloading
 								</h6>
 								<ul id="tasksD" class="item-list">
-									<%=generateFileList(torrentDPath,rootPath)%>
+									<%=generateFileList(torrentDPath,rootPath,false)%>
 								</ul>
 								
 								
@@ -201,6 +215,7 @@
 		</td>
 	</tr>
 	</table>
+	</h1>
 
 	<a href="#" id="btn-scroll-up"
 		class="btn-scroll-up btn btn-small btn-inverse"> <i
