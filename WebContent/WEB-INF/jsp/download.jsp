@@ -1,3 +1,9 @@
+<%@page import="java.io.IOException"%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="java.io.InputStreamReader"%>
+<%@page import="java.io.InputStream"%>
+<%@page import="java.io.BufferedInputStream"%>
+<%@page import="java.io.BufferedOutputStream"%>
 <%
 String fileName="";
 String filePath="";
@@ -14,31 +20,33 @@ while (enumString.hasMoreElements()) {
 }
 %>
 <%
-  //String filename = "home.jsp";
-  response.setContentType("APPLICATION/OCTET-STREAM");   
-  response.setHeader("Content-Disposition","attachment; filename=\"" + fileName + "\"");   
-  
-  java.io.File file=new java.io.File(filePath+java.io.File.separator+fileName);
-  java.io.FileInputStream fileInputStream=new java.io.FileInputStream(file);  
-  // Get the size of the file
-  long length = file.length();
-  
-  if (length > Integer.MAX_VALUE) {
-      throw new java.io.IOException("Could not completely read file " + file.getName() + " as it is too long (" + length + " bytes, max supported " + Integer.MAX_VALUE + ")");
-   }
+	//String filename = "home.jsp";
+	java.io.File file = new java.io.File(filePath + java.io.File.separator + fileName);
+	response.setContentType("APPLICATION/OCTET-STREAM");
+	response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+	// Get the size of the file
+	long length = file.length();
 
-  
-  response.setBufferSize(1048576);
-  System.out.println("response.getBufferSize():"+response.getBufferSize());
-  byte[] bytes = new byte[4086];
-  int i;   
-  while ((i=fileInputStream.read()) != -1) {  
-	  response.getOutputStream().write(i);
-	  
-  }
-  
-	fileInputStream.close();
-	response.getOutputStream().flush();
-  
-  
+	response.setHeader("Content-Type", getServletContext().getMimeType(fileName));
+	response.setHeader("Content-Length", String.valueOf(length));
+	java.io.FileInputStream fileInputStream = new java.io.FileInputStream(file);
+
+	if (length > Integer.MAX_VALUE) {
+		throw new java.io.IOException("Could not completely read file " + file.getName()+ " as it is too long (" + length + " bytes, max supported " + Integer.MAX_VALUE + ")");
+	}
+	BufferedInputStream input = null;
+	BufferedOutputStream output = null;
+
+	try {
+		input = new BufferedInputStream(new FileInputStream(file));
+		output = new BufferedOutputStream(response.getOutputStream());
+		byte[] buffer = new byte[8192];
+		int length1 = 0;
+		while ((length1 = input.read(buffer)) > 0) {
+			output.write(buffer, 0, length1);
+		}
+	} finally {
+		if (output != null) try {output.close();} catch (IOException logOrIgnore) {}
+		if (input != null) try {input.close();} catch (IOException logOrIgnore) {}
+	}
 %> 
