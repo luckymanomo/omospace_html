@@ -11,7 +11,7 @@ public class TestMain {
 			if(subF.getName().endsWith(".js")){
 				System.out.println("<script src=\"<c:url value=\"/resources/aceJs/"+subF.getName()+"\" />\"></script>");
 			}//test pongsakorn jae kaa kuy
-			long test=323232;
+			long test=323232;//agauin
 			new java.text.DecimalFormat("0.00").format(test);
 		}
 	}
