@@ -101,14 +101,17 @@ function sendFileName(a){
 	
 	<br>
 	<br>
-	<h1 class="animated zoomIn">
 	<table class="tableLayout" border="0" width='70%'>
 	<tr>
 		<td valign="top" width='50%'>
+		
 			<table class="tableLayout" border="0">
+			
 				<tr>
 					<td colspan="2">
-						<form action="<c:url value="/report" />" method="POST" target="_blank"">
+		<h1 class="animated ZoomIn">				
+	<form action="<c:url value="/report" />" method="POST" target="_blank"">
+	
 							<table class="tableLayout">
 								<tr>
 									<td>
@@ -128,12 +131,12 @@ function sendFileName(a){
 									</td>
 								</tr>
 							</table>
-						</form>
+						</form></h1>
 					</td>
-
 				</tr>
+				
 				<tr>
-					<td>
+					<td><h1 class="animated ZoomIn">
 						<div class="infobox infobox-green">
 							<div class="infobox-progress">
 								<div class="easy-pie-chart percentage" data-percent="<%=(int)(leftSpace/totalSpace*100)%>" data-size="46">
@@ -146,10 +149,10 @@ function sendFileName(a){
 									<span class="bigger-110">~</span> <%=(int)(leftSpace)%>GB / <%=(int)(totalSpace)%>GB
 								</div>
 							</div>
-						</div>
+						</div></h1>
 					</td>
 					<td>
-						
+						<h1 class="animated ZoomIn">
 						<div class="infobox infobox-red">
 							<div class="infobox-progress">
 								<div class="easy-pie-chart percentage" data-percent="<%=(int)(usedSpace/totalSpace*100)%>" data-size="46">
@@ -162,15 +165,16 @@ function sendFileName(a){
 									<span class="bigger-110">~</span> <%=(int)(usedSpace)%>GB / <%=(int)(totalSpace)%>GB
 								</div>
 							</div>
-						</div>
+						</div></h1>
 					</td>
 				</tr>
 				
 				<tr valign="top">
 					<td colspan="2" align="center">
+					<h1 class="animated ZoomIn">
 						<div class="widget-main">
 							<div id="piechart-placeholder"></div>
-						</div>
+						</div></h1>
 					</td>
 				</tr>
 
@@ -193,16 +197,17 @@ function sendFileName(a){
 								<h6 class="smaller lighter green">
 									Completed
 								</h6>
-
+								<h1 class="animated ZoomIn">
 								<ul id="tasksC" class="item-list">
 									<%=generateFileList(torrentCPath,rootPath,true)%>
-								</ul>
+								</ul></h1>
 								<h6 class="smaller lighter red">
 									Downloading
 								</h6>
+								<h1 class="animated ZoomIn">
 								<ul id="tasksD" class="item-list">
 									<%=generateFileList(torrentDPath,rootPath,false)%>
-								</ul>
+								</ul></h1>
 								
 								
 						</div>
@@ -215,7 +220,6 @@ function sendFileName(a){
 		</td>
 	</tr>
 	</table>
-	</h1>
 
 	<a href="#" id="btn-scroll-up"
 		class="btn-scroll-up btn btn-small btn-inverse"> <i
