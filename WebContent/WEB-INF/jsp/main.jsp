@@ -4,8 +4,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	//configuration
-	String piePath="/torrentFiles";
-	String torrentDPath="/torrentFiles/Downloading";
+	String piePath="/Users/luckymanomo/Documents/Java/temp/torrentFiles";
+	String torrentDPath=piePath+"/Downloading";
 	String torrentCPath="";
 	java.util.Random r=null;
 	java.awt.Color color=null;
